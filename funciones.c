@@ -13,6 +13,10 @@ int pedirEntero(char mensaje[], int min, int max) {
     do {
         printf("%s", mensaje);
         lectura = scanf("%d", &numero);
+        if (lectura == EOF) {
+            printf("\nEntrada finalizada. Cerrando el programa.\n");
+            exit(0);
+        }
         if (lectura != 1 || numero < min || numero > max) {
             printf("Entrada invalida. Escriba un numero entre %d y %d.\n", min, max);
             vaciarBuffer();
@@ -28,6 +32,10 @@ float pedirDecimal(char mensaje[], float min, float max) {
     do {
         printf("%s", mensaje);
         lectura = scanf("%f", &numero);
+        if (lectura == EOF) {
+            printf("\nEntrada finalizada. Cerrando el programa.\n");
+            exit(0);
+        }
         if (lectura != 1 || numero < min || numero > max) {
             printf("Entrada invalida. Escriba un valor entre %.2f y %.2f.\n", min, max);
             vaciarBuffer();
@@ -42,7 +50,10 @@ void pedirTexto(char mensaje[], char destino[], int tam) {
     do {
         valido = 1;
         printf("%s", mensaje);
-        fgets(destino, tam, stdin);
+        if (fgets(destino, tam, stdin) == NULL) {
+            printf("\nEntrada finalizada. Cerrando el programa.\n");
+            exit(0);
+        }
         if (destino[0] == '\n' || destino[0] == '\0') {
             printf("Entrada invalida. El texto no puede quedar vacio.\n");
             valido = 0;
